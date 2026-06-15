@@ -188,6 +188,14 @@ export function Hero({ onLaunchTimeline, onExploreProjects }: { onLaunchTimeline
           whileTap={{ scale: 0.97 }}
           className="relative size-56 cursor-pointer md:size-72"
         >
+          {/* Shockwave on activate */}
+          {exploded && (
+            <>
+              <span className="pointer-events-none absolute inset-0 -z-10 animate-shockwave rounded-full border-2 border-[oklch(0.85_0.18_200)]" />
+              <span className="pointer-events-none absolute inset-0 -z-10 animate-shockwave rounded-full border border-[oklch(0.68_0.24_295)]" style={{ animationDelay: "0.15s" }} />
+              <span className="pointer-events-none absolute inset-0 -z-10 animate-shockwave rounded-full border border-[oklch(0.75_0.2_160)]" style={{ animationDelay: "0.3s" }} />
+            </>
+          )}
           {/* Aura */}
           <motion.div
             animate={exploded ? { scale: 1.6, opacity: 0.9 } : { scale: 1, opacity: 0.7 }}
@@ -204,7 +212,6 @@ export function Hero({ onLaunchTimeline, onExploreProjects }: { onLaunchTimeline
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
             <div className="pointer-events-none absolute inset-0 mix-blend-overlay bg-[radial-gradient(circle_at_30%_30%,oklch(0.85_0.18_200/40%),transparent_60%)]" />
-            {/* Hologram glitch lines */}
             <div className="pointer-events-none absolute inset-0 mix-blend-screen opacity-30"
               style={{
                 backgroundImage:
@@ -217,10 +224,28 @@ export function Hero({ onLaunchTimeline, onExploreProjects }: { onLaunchTimeline
           </div>
           {/* Tap hint */}
           <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap font-mono text-[10px] tracking-widest text-foreground/40">
-            CLICK TO {exploded ? "STABILIZE" : "EXPLODE"}
+            CLICK TO {exploded ? "STABILIZE" : "ACTIVATE ENGINEER MODE"}
           </div>
         </motion.div>
       </div>
+
+      {/* ENGINEER MODE banner */}
+      {exploded && (
+        <motion.div
+          initial={{ opacity: 0, y: -8, scale: 0.96 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0 }}
+          className="pointer-events-none fixed left-1/2 top-24 z-40 -translate-x-1/2"
+        >
+          <div className="glass-strong glow-cyan rounded-full px-5 py-2 font-mono text-[11px] tracking-[0.35em] text-[oklch(0.85_0.18_200)]">
+            ◉ ENGINEER MODE · ACTIVATED
+          </div>
+        </motion.div>
+      )}
+      {exploded && (
+        <div className="pointer-events-none fixed inset-0 z-30 animate-engineer-flash bg-[radial-gradient(circle_at_center,oklch(0.85_0.18_200/22%),transparent_60%)]" />
+      )}
+
 
       {/* Title */}
       <motion.div
