@@ -14,7 +14,7 @@ const REASONS = [
 export function Snapshot() {
   return (
     <section className="relative px-6 py-32">
-      <SectionHeader tag="/recruiter/snapshot" title="Why Hire Ravikiran" sub="The executive summary, compressed." />
+      <SectionHeader tag="/recruiter/snapshot" title="Why Hire Palaparthi Ravikiran" sub="The executive summary, compressed." />
       <div className="mx-auto mt-12 grid max-w-5xl gap-6 lg:grid-cols-5">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -75,7 +75,7 @@ export function Snapshot() {
       </div>
 
       <div className="mt-20 text-center font-mono text-[10px] tracking-widest text-foreground/30">
-        RAVIKIRAN.OS · v3.0 · BUILT WITH PRECISION · © 2026
+        PALAPARTHI RAVIKIRAN.OS · v3.0 · BUILT WITH PRECISION · © 2026
       </div>
     </section>
   );

@@ -4,7 +4,7 @@ import { Bot, X, MessageSquare } from "lucide-react";
 
 const QA: { q: string; a: string[] }[] = [
   {
-    q: "Why should I hire Ravikiran?",
+    q: "Why should I hire Palaparthi Ravikiran?",
     a: [
       "Ravikiran ships production-grade systems as a student.",
       "TaskFlow Engine reached 99.7% job completion with a self-healing retry layer.",
@@ -106,7 +106,7 @@ export function RecruiterAI() {
                   </div>
                   <div>
                     <div className="text-sm font-semibold">Recruiter AI</div>
-                    <div className="font-mono text-[10px] text-foreground/50">RAVIKIRAN.OS · /agents/recruiter</div>
+                    <div className="font-mono text-[10px] text-foreground/50">PALAPARTHI RAVIKIRAN.OS · /agents/recruiter</div>
                   </div>
                 </div>
                 <button onClick={() => setOpen(false)} className="rounded-full p-1.5 transition hover:bg-white/10">
@@ -119,7 +119,7 @@ export function RecruiterAI() {
                   <div className="space-y-2">
                     <div className="mb-3 flex items-start gap-2 text-sm text-foreground/80">
                       <MessageSquare className="mt-0.5 size-4 text-[oklch(0.85_0.18_200)]" />
-                      Pick a question to query Ravikiran's profile.
+                      Pick a question to query Palaparthi Ravikiran's profile.
                     </div>
                     {QA.map((q, i) => (
                       <button
