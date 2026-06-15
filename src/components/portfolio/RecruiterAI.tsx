@@ -6,7 +6,7 @@ const QA: { q: string; a: string[] }[] = [
   {
     q: "Why should I hire Palaparthi Ravikiran?",
     a: [
-      "Ravikiran ships production-grade systems as a student.",
+      "Palaparthi Ravikiran ships production-grade systems as a student.",
       "TaskFlow Engine reached 99.7% job completion with a self-healing retry layer.",
       "He pairs strong Java/Spring Boot fundamentals with shipped AI features (Gemini, WebRTC, sandboxed code execution).",
       "Verdict: rare full-stack + backend + AI triple-threat. Hire signal: HIGH.",
