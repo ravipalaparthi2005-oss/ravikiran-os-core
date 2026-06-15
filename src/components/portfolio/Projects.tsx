@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 import { forwardRef, useState } from "react";
+import type { LucideIcon } from "lucide-react";
 import { SectionHeader } from "./Timeline";
 import { Cpu, Database, Globe, Layers, Shield, Sparkles, Workflow, Zap } from "lucide-react";
 
-type ProjectNode = { id: string; label: string; icon: React.ComponentType<{ className?: string }>; x: number; y: number };
+type ProjectNode = { id: string; label: string; icon: LucideIcon; x: number; y: number };
 type Project = {
   id: string;
   name: string;
