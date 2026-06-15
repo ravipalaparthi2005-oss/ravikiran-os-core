@@ -47,7 +47,7 @@ const RESPONSES: Record<string, string[]> = {
 
 export function Terminal() {
   const [lines, setLines] = useState<Line[]>([
-    { kind: "sys", text: "RAVIKIRAN.OS terminal — type 'help' to begin." },
+    { kind: "sys", text: "PALAPARTHI RAVIKIRAN.OS terminal — type 'help' to begin." },
   ]);
   const [input, setInput] = useState("");
   const endRef = useRef<HTMLDivElement>(null);

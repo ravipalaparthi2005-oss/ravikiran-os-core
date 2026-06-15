@@ -57,7 +57,7 @@ export const JourneyTrain = forwardRef<HTMLElement>((_, ref) => {
       <SectionHeader
         tag="/career/journey"
         title="The Journey"
-        sub="Four stations. One trajectory. Scroll to ride through Ravikiran's engineering origin."
+        sub="Four stations. One trajectory. Scroll to ride through Palaparthi Ravikiran's engineering origin."
       />
 
       <div ref={localRef} className="relative mx-auto mt-20 max-w-5xl">

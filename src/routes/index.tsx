@@ -16,17 +16,17 @@ import { Snapshot } from "@/components/portfolio/Snapshot";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Ravikiran.OS — Software Engineer Portfolio" },
+      { title: "Palaparthi Ravikiran.OS — Software Engineer Portfolio" },
       {
         name: "description",
         content:
-          "Ravikiran Palaparthi — Software Engineer, Java Backend & Full Stack Developer. AI-powered systems, scalable architectures, modern products.",
+          "Palaparthi Ravikiran — Software Engineer, Java Backend & Full Stack Developer. AI-powered systems, scalable architectures, modern products.",
       },
-      { property: "og:title", content: "Ravikiran.OS — Software Engineer Portfolio" },
+      { property: "og:title", content: "Palaparthi Ravikiran.OS — Software Engineer Portfolio" },
       {
         property: "og:description",
         content:
-          "An engineering operating system showcasing Ravikiran Palaparthi's projects, skills, and impact.",
+          "An engineering operating system showcasing Palaparthi Ravikiran's projects, skills, and impact.",
       },
     ],
   }),

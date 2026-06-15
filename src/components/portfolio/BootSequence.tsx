@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const LINES = [
-  { text: "> INITIALIZING RAVIKIRAN.OS v3.0", c: "text-[oklch(0.85_0.18_200)]" },
+  { text: "> INITIALIZING PALAPARTHI RAVIKIRAN.OS v3.0", c: "text-[oklch(0.85_0.18_200)]" },
   { text: "> [ OK ] Mounting /engineering/profile", c: "text-foreground/80" },
   { text: "> [ OK ] Loading AI Systems...", c: "text-foreground/80" },
   { text: "> [ OK ] Loading Backend Architecture...", c: "text-foreground/80" },

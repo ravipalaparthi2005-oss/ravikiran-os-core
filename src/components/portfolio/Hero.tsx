@@ -230,8 +230,8 @@ export function Hero({ onLaunchTimeline, onExploreProjects }: { onLaunchTimeline
         className="text-center"
       >
         <h1 className="font-display text-[clamp(3rem,10vw,8rem)] font-bold leading-[0.9] tracking-tighter">
+          <span className="block text-foreground/90">PALAPARTHI</span>
           <span className="block text-aurora">RAVIKIRAN</span>
-          <span className="block text-foreground/90">SOFTWARE ENGINEER</span>
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-balance text-base text-foreground/70 md:text-lg">
           Building <span className="text-foreground">AI-Powered Systems</span>,{" "}
