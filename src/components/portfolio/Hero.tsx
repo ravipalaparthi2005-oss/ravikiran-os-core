@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import portrait from "@/assets/hero-portrait.jpg";
 import { ArrowRight, Sparkles, Download, Github } from "lucide-react";
 
@@ -14,11 +14,113 @@ const ORBIT_SKILLS = [
   { name: "TypeScript", r: 280, dur: 38, delay: -32 },
 ];
 
+type Particle = { x: number; y: number; vx: number; vy: number; life: number; max: number; hue: number };
+
+function CursorTrail() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const particles = useRef<Particle[]>([]);
+  const mouse = useRef({ x: -9999, y: -9999, prev: { x: 0, y: 0 } });
+
+  useEffect(() => {
+    const canvas = canvasRef.current!;
+    const ctx = canvas.getContext("2d")!;
+    let raf = 0;
+
+    const resize = () => {
+      canvas.width = window.innerWidth * devicePixelRatio;
+      canvas.height = window.innerHeight * devicePixelRatio;
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
+      ctx.scale(devicePixelRatio, devicePixelRatio);
+    };
+    resize();
+    window.addEventListener("resize", resize);
+
+    const onMove = (e: MouseEvent) => {
+      const m = mouse.current;
+      m.prev.x = m.x === -9999 ? e.clientX : m.x;
+      m.prev.y = m.y === -9999 ? e.clientY : m.y;
+      m.x = e.clientX;
+      m.y = e.clientY;
+      const dx = m.x - m.prev.x;
+      const dy = m.y - m.prev.y;
+      const speed = Math.min(20, Math.hypot(dx, dy));
+      const n = Math.min(6, 1 + Math.floor(speed / 3));
+      for (let i = 0; i < n; i++) {
+        particles.current.push({
+          x: m.x + (Math.random() - 0.5) * 8,
+          y: m.y + (Math.random() - 0.5) * 8,
+          vx: (Math.random() - 0.5) * 1.2 + dx * 0.05,
+          vy: (Math.random() - 0.5) * 1.2 + dy * 0.05,
+          life: 0,
+          max: 50 + Math.random() * 30,
+          hue: Math.random() < 0.5 ? 200 : 295,
+        });
+      }
+      if (particles.current.length > 180) particles.current.splice(0, particles.current.length - 180);
+    };
+    window.addEventListener("mousemove", onMove);
+
+    const tick = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const ps = particles.current;
+      // Connect particles near cursor
+      for (let i = 0; i < ps.length; i++) {
+        const p = ps[i];
+        p.life += 1;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vx *= 0.96;
+        p.vy *= 0.96;
+        const a = 1 - p.life / p.max;
+        if (a <= 0) continue;
+        const hueStr = p.hue === 200 ? "133, 220, 255" : "180, 140, 255";
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2 * a + 0.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${hueStr}, ${a * 0.9})`;
+        ctx.shadowColor = `rgba(${hueStr}, ${a})`;
+        ctx.shadowBlur = 12;
+        ctx.fill();
+      }
+      ctx.shadowBlur = 0;
+      // Neural links between close particles
+      for (let i = 0; i < ps.length; i++) {
+        for (let j = i + 1; j < ps.length; j++) {
+          const a = ps[i], b = ps[j];
+          const d = Math.hypot(a.x - b.x, a.y - b.y);
+          if (d < 60) {
+            const op = (1 - d / 60) * 0.18 * (1 - a.life / a.max);
+            if (op <= 0) continue;
+            ctx.strokeStyle = `rgba(133, 220, 255, ${op})`;
+            ctx.lineWidth = 0.6;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+      particles.current = ps.filter((p) => p.life < p.max);
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+
+    return () => {
+      window.removeEventListener("resize", resize);
+      window.removeEventListener("mousemove", onMove);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} className="pointer-events-none fixed inset-0 z-[5]" />;
+}
+
 export function Hero({ onLaunchTimeline, onExploreProjects }: { onLaunchTimeline: () => void; onExploreProjects: () => void }) {
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
   const rx = useSpring(useTransform(my, [-200, 200], [10, -10]), { stiffness: 120, damping: 18 });
   const ry = useSpring(useTransform(mx, [-200, 200], [-10, 10]), { stiffness: 120, damping: 18 });
+  const [exploded, setExploded] = useState(false);
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
@@ -33,6 +135,7 @@ export function Hero({ onLaunchTimeline, onExploreProjects }: { onLaunchTimeline
 
   return (
     <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pb-20 pt-32">
+      <CursorTrail />
       <div className="grid-bg pointer-events-none absolute inset-0 opacity-30" />
 
       {/* Status bar */}
@@ -66,20 +169,31 @@ export function Hero({ onLaunchTimeline, onExploreProjects }: { onLaunchTimeline
               ["--orbit-r" as string]: `${s.r}px`,
               animation: `orbit ${s.dur}s linear infinite`,
               animationDelay: `${s.delay}s`,
+              animationPlayState: exploded ? "paused" : "running",
             }}
           >
-            <div className="glass rounded-full px-3 py-1.5 font-mono text-[11px] tracking-wide text-foreground/90 whitespace-nowrap">
+            <motion.div
+              animate={exploded ? { scale: 1.4, opacity: 0.4 } : { scale: 1, opacity: 1 }}
+              className="glass rounded-full px-3 py-1.5 font-mono text-[11px] tracking-wide text-foreground/90 whitespace-nowrap"
+            >
               {s.name}
-            </div>
+            </motion.div>
           </div>
         ))}
 
         {/* Portrait */}
         <motion.div
+          onClick={() => setExploded((v) => !v)}
           style={{ rotateX: rx, rotateY: ry, transformPerspective: 1000 }}
-          className="relative size-56 md:size-72"
+          whileTap={{ scale: 0.97 }}
+          className="relative size-56 cursor-pointer md:size-72"
         >
-          <div className="absolute -inset-4 rounded-full bg-gradient-to-br from-[oklch(0.78_0.18_200/40%)] via-[oklch(0.68_0.24_295/30%)] to-[oklch(0.75_0.2_160/20%)] blur-2xl" />
+          {/* Aura */}
+          <motion.div
+            animate={exploded ? { scale: 1.6, opacity: 0.9 } : { scale: 1, opacity: 0.7 }}
+            transition={{ duration: 0.8 }}
+            className="absolute -inset-4 rounded-full bg-gradient-to-br from-[oklch(0.78_0.18_200/40%)] via-[oklch(0.68_0.24_295/30%)] to-[oklch(0.75_0.2_160/20%)] blur-2xl"
+          />
           <div className="glass-strong relative size-full overflow-hidden rounded-full">
             <img
               src={portrait}
@@ -90,10 +204,20 @@ export function Hero({ onLaunchTimeline, onExploreProjects }: { onLaunchTimeline
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
             <div className="pointer-events-none absolute inset-0 mix-blend-overlay bg-[radial-gradient(circle_at_30%_30%,oklch(0.85_0.18_200/40%),transparent_60%)]" />
+            {/* Hologram glitch lines */}
+            <div className="pointer-events-none absolute inset-0 mix-blend-screen opacity-30"
+              style={{
+                backgroundImage:
+                  "repeating-linear-gradient(0deg, transparent 0, transparent 2px, oklch(0.85 0.18 200 / 8%) 2px, oklch(0.85 0.18 200 / 8%) 3px)",
+              }} />
           </div>
           {/* Scan line */}
           <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-full">
             <div className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-[oklch(0.85_0.18_200)] to-transparent" style={{ animation: "scanline 4s linear infinite" }} />
+          </div>
+          {/* Tap hint */}
+          <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap font-mono text-[10px] tracking-widest text-foreground/40">
+            CLICK TO {exploded ? "STABILIZE" : "EXPLODE"}
           </div>
         </motion.div>
       </div>
@@ -128,14 +252,14 @@ export function Hero({ onLaunchTimeline, onExploreProjects }: { onLaunchTimeline
           className="group glass-strong glow-cyan inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition hover:scale-[1.03]"
         >
           <Sparkles className="size-4 text-[oklch(0.85_0.18_200)]" />
-          Launch Career Timeline
+          Board the Journey
           <ArrowRight className="size-4 transition group-hover:translate-x-1" />
         </button>
         <button
           onClick={onExploreProjects}
           className="glass inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition hover:scale-[1.03]"
         >
-          Explore Projects
+          Run Simulations
           <ArrowRight className="size-4" />
         </button>
         <a

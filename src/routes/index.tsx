@@ -4,10 +4,12 @@ import { NeuralBackground } from "@/components/portfolio/NeuralBackground";
 import { BootSequence } from "@/components/portfolio/BootSequence";
 import { Hero } from "@/components/portfolio/Hero";
 import { RecruiterAI } from "@/components/portfolio/RecruiterAI";
-import { Timeline } from "@/components/portfolio/Timeline";
-import { SkillsConstellation } from "@/components/portfolio/SkillsConstellation";
-import { Projects } from "@/components/portfolio/Projects";
-import { Metrics } from "@/components/portfolio/Metrics";
+import { JourneyTrain } from "@/components/portfolio/JourneyTrain";
+import { SolarSystem } from "@/components/portfolio/SolarSystem";
+import { InsideMyBrain } from "@/components/portfolio/InsideMyBrain";
+import { Simulations } from "@/components/portfolio/Simulations";
+import { MissionControl } from "@/components/portfolio/MissionControl";
+import { IfIJoin } from "@/components/portfolio/IfIJoin";
 import { Terminal } from "@/components/portfolio/Terminal";
 import { Snapshot } from "@/components/portfolio/Snapshot";
 
@@ -33,8 +35,8 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const [booted, setBooted] = useState(false);
-  const timelineRef = useRef<HTMLElement>(null);
-  const projectsRef = useRef<HTMLElement>(null);
+  const journeyRef = useRef<HTMLElement>(null);
+  const simsRef = useRef<HTMLElement>(null);
 
   const scrollTo = (ref: React.RefObject<HTMLElement | null>) =>
     ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -46,13 +48,15 @@ function Index() {
       {booted && (
         <>
           <Hero
-            onLaunchTimeline={() => scrollTo(timelineRef)}
-            onExploreProjects={() => scrollTo(projectsRef)}
+            onLaunchTimeline={() => scrollTo(journeyRef)}
+            onExploreProjects={() => scrollTo(simsRef)}
           />
-          <Timeline ref={timelineRef} />
-          <SkillsConstellation />
-          <Projects ref={projectsRef} />
-          <Metrics />
+          <JourneyTrain ref={journeyRef} />
+          <SolarSystem />
+          <InsideMyBrain />
+          <Simulations ref={simsRef as never} />
+          <MissionControl />
+          <IfIJoin />
           <Terminal />
           <Snapshot />
           <RecruiterAI />
