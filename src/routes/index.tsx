@@ -54,7 +54,7 @@ function Index() {
           <JourneyTrain ref={journeyRef} />
           <SolarSystem />
           <InsideMyBrain />
-          <Simulations ref={simsRef as never} />
+          <section ref={simsRef}><Simulations /></section>
           <MissionControl />
           <IfIJoin />
           <Terminal />
