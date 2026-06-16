@@ -13,8 +13,8 @@ const FINDINGS = [
 
 export function Snapshot() {
   return (
-    <section className="relative px-6 py-32">
-      <SectionHeader tag="/recruiter/briefing" title="Recruiter Briefing" sub="Classified hiring dossier · executive summary, compressed." />
+    <section id="briefing" className="grain relative px-6 py-32">
+      <SectionHeader tag="/recruiter/briefing" title="Recruiter Briefing" sub="Classified hiring dossier · executive summary, compressed." accent="oklch(0.92 0.06 90)" accent2="oklch(0.82 0.18 80)" />
 
       <div className="mx-auto mt-12 grid max-w-5xl gap-6 lg:grid-cols-5">
         {/* Dossier */}
