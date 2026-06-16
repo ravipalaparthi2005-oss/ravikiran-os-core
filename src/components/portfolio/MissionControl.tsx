@@ -101,11 +101,13 @@ function RadarChart() {
 
 export function MissionControl() {
   return (
-    <section className="relative px-6 py-32">
+    <section id="mission" className="grain relative px-6 py-32">
       <SectionHeader
         tag="/mission/control"
         title="Mission Control"
         sub="Real-time telemetry from a student-engineer running live production systems."
+        accent="oklch(0.75 0.2 160)"
+        accent2="oklch(0.85 0.18 200)"
       />
 
       <div className="mx-auto mt-12 grid max-w-6xl gap-4 lg:grid-cols-3">

@@ -350,11 +350,13 @@ const TABS = [
 export function Simulations() {
   const [tab, setTab] = useState<(typeof TABS)[number]["id"]>("interviewos");
   return (
-    <section className="relative px-6 py-32">
+    <section id="sims" className="grain relative px-6 py-32">
       <SectionHeader
         tag="/projects/simulations"
         title="Live Project Simulations"
         sub="Don't just read about them — touch them. Three demos, fully interactive."
+        accent="oklch(0.68 0.24 295)"
+        accent2="oklch(0.78 0.18 200)"
       />
 
       <div className="mx-auto mt-12 max-w-6xl">

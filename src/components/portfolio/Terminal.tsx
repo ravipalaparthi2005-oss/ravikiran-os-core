@@ -172,8 +172,8 @@ export function Terminal() {
     : "text-foreground/75";
 
   return (
-    <section className="relative px-6 py-32">
-      <SectionHeader tag="/system/terminal" title="Command Center" sub="Query the OS directly. ↑/↓ history · Tab to autocomplete · try: projects · backend · ai · open github" />
+    <section id="terminal" className="grain relative px-6 py-32">
+      <SectionHeader tag="/system/terminal" title="Command Center" sub="Query the OS directly. ↑/↓ history · Tab to autocomplete · try: projects · backend · ai · open github" accent="oklch(0.85 0.18 145)" accent2="oklch(0.75 0.2 160)" />
       <div className="mx-auto mt-12 max-w-3xl">
         <div className="glass-strong overflow-hidden rounded-2xl">
           <div className="flex items-center gap-1.5 border-b border-white/10 px-4 py-2.5">
