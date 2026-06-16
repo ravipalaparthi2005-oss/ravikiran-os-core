@@ -167,6 +167,19 @@
   border: 1px dashed oklch(0.82 0.18 80 / 45%);
 }
 
+@utility grain {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+}
+
 @utility module-divider {
   height: 1px;
   background: linear-gradient(90deg, transparent, oklch(1 0 0 / 14%) 20%, oklch(1 0 0 / 14%) 80%, transparent);
