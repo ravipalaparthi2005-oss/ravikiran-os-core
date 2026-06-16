@@ -30,11 +30,13 @@ export function SolarSystem() {
   const [sun, setSun] = useState(false);
 
   return (
-    <section className="relative px-6 py-32">
+    <section id="skills" className="grain relative px-6 py-32">
       <SectionHeader
         tag="/skills/solar-system"
         title="The Skill System"
         sub="Java is the sun. Every planet is a tool in orbit. Click to dock with one."
+        accent="oklch(0.82 0.18 80)"
+        accent2="oklch(0.78 0.2 25)"
       />
 
       <div className="relative mx-auto mt-16 flex aspect-square w-full max-w-3xl items-center justify-center">

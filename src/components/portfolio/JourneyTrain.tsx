@@ -53,11 +53,13 @@ export const JourneyTrain = forwardRef<HTMLElement>((_, ref) => {
   const lineH = useTransform(scrollYProgress, [0.05, 0.9], ["0%", "100%"]);
 
   return (
-    <section ref={ref} id="timeline" className="relative px-6 py-32">
+    <section ref={ref} id="journey" className="grain relative px-6 py-32">
       <SectionHeader
         tag="/career/journey"
         title="The Journey"
         sub="Four stations. One trajectory. Scroll to ride through Palaparthi Ravikiran's engineering origin."
+        accent="oklch(0.85 0.18 200)"
+        accent2="oklch(0.68 0.24 295)"
       />
 
       <div ref={localRef} className="relative mx-auto mt-20 max-w-5xl">

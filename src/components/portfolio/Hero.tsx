@@ -2,6 +2,7 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import portrait from "@/assets/hero-portrait.jpg";
 import { ArrowRight, Sparkles, Download, Github } from "lucide-react";
+import { MagneticButton } from "./primitives";
 
 const ORBIT_SKILLS = [
   { name: "Java", r: 200, dur: 28, delay: 0 },
@@ -272,21 +273,21 @@ export function Hero({ onLaunchTimeline, onExploreProjects }: { onLaunchTimeline
         transition={{ delay: 0.7 }}
         className="mt-10 flex flex-wrap items-center justify-center gap-3"
       >
-        <button
+        <MagneticButton
           onClick={onLaunchTimeline}
           className="group glass-strong glow-cyan inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition hover:scale-[1.03]"
         >
           <Sparkles className="size-4 text-[oklch(0.85_0.18_200)]" />
           Board the Journey
           <ArrowRight className="size-4 transition group-hover:translate-x-1" />
-        </button>
-        <button
+        </MagneticButton>
+        <MagneticButton
           onClick={onExploreProjects}
           className="glass inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition hover:scale-[1.03]"
         >
           Run Simulations
           <ArrowRight className="size-4" />
-        </button>
+        </MagneticButton>
         <a
           href="https://github.com/"
           target="_blank"

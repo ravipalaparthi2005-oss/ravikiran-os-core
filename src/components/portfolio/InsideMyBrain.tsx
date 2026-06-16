@@ -49,11 +49,13 @@ export function InsideMyBrain() {
   const m = MODES[mode];
 
   return (
-    <section className="relative px-6 py-32">
+    <section id="brain" className="grain relative px-6 py-32">
       <SectionHeader
         tag="/agents/cognition"
         title="Inside My Brain"
         sub="Switch modes. Watch the neural pathway light up. This is how I think before I write code."
+        accent="oklch(0.72 0.18 240)"
+        accent2="oklch(0.85 0.18 200)"
       />
 
       {/* Mode switcher */}

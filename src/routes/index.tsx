@@ -12,6 +12,7 @@ import { MissionControl } from "@/components/portfolio/MissionControl";
 import { IfIJoin } from "@/components/portfolio/IfIJoin";
 import { Terminal } from "@/components/portfolio/Terminal";
 import { Snapshot } from "@/components/portfolio/Snapshot";
+import { ModuleNav } from "@/components/portfolio/ModuleNav";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -33,6 +34,10 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
+function Divider() {
+  return <div className="mx-auto my-4 max-w-6xl module-divider" aria-hidden />;
+}
+
 function Index() {
   const [booted, setBooted] = useState(false);
   const journeyRef = useRef<HTMLElement>(null);
@@ -47,17 +52,28 @@ function Index() {
       <NeuralBackground />
       {booted && (
         <>
-          <Hero
-            onLaunchTimeline={() => scrollTo(journeyRef)}
-            onExploreProjects={() => scrollTo(simsRef)}
-          />
+          <ModuleNav />
+          <section id="hero">
+            <Hero
+              onLaunchTimeline={() => scrollTo(journeyRef)}
+              onExploreProjects={() => scrollTo(simsRef)}
+            />
+          </section>
+          <Divider />
           <JourneyTrain ref={journeyRef} />
+          <Divider />
           <SolarSystem />
+          <Divider />
           <InsideMyBrain />
+          <Divider />
           <section ref={simsRef}><Simulations /></section>
+          <Divider />
           <MissionControl />
+          <Divider />
           <IfIJoin />
+          <Divider />
           <Terminal />
+          <Divider />
           <Snapshot />
           <RecruiterAI />
         </>

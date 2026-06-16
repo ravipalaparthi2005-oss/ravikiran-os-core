@@ -42,11 +42,13 @@ const PHASES = [
 
 export function IfIJoin() {
   return (
-    <section className="relative px-6 py-32">
+    <section id="future" className="grain relative px-6 py-32">
       <SectionHeader
         tag="/forecast/onboarding"
         title="If I Join Your Team"
         sub="A projected operating cadence — Day 1 through Month 6. Calibrated, not promised."
+        accent="oklch(0.78 0.2 25)"
+        accent2="oklch(0.82 0.18 80)"
       />
 
       <div className="mx-auto mt-16 max-w-6xl">
