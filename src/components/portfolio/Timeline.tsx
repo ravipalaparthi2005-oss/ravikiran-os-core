@@ -65,7 +65,20 @@ export const Timeline = forwardRef<HTMLElement>((_, ref) => {
 });
 Timeline.displayName = "Timeline";
 
-export function SectionHeader({ tag, title, sub }: { tag: string; title: string; sub?: string }) {
+export function SectionHeader({
+  tag,
+  title,
+  sub,
+  accent = "oklch(0.85 0.18 200)",
+  accent2,
+}: {
+  tag: string;
+  title: string;
+  sub?: string;
+  accent?: string;
+  accent2?: string;
+}) {
+  const a2 = accent2 ?? accent;
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -73,11 +86,24 @@ export function SectionHeader({ tag, title, sub }: { tag: string; title: string;
       viewport={{ once: true }}
       className="mx-auto max-w-3xl text-center"
     >
-      <div className="font-mono text-[11px] tracking-widest text-[oklch(0.85_0.18_200)]">{tag}</div>
+      <div className="inline-flex items-center gap-2 font-mono text-[11px] tracking-widest" style={{ color: accent }}>
+        <span className="size-1 rounded-full" style={{ background: accent, boxShadow: `0 0 8px ${accent}` }} />
+        {tag}
+      </div>
       <h2 className="font-display mt-3 text-4xl font-bold tracking-tight md:text-6xl">
-        <span className="text-aurora">{title}</span>
+        <span
+          style={{
+            background: `linear-gradient(135deg, ${accent} 0%, ${a2} 60%, oklch(0.98 0.005 250) 120%)`,
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+          }}
+        >
+          {title}
+        </span>
       </h2>
       {sub && <p className="mt-4 text-balance text-foreground/65">{sub}</p>}
+      <div className="mx-auto mt-6 h-px w-24" style={{ background: `linear-gradient(90deg, transparent, ${accent}, transparent)` }} />
     </motion.div>
   );
 }
