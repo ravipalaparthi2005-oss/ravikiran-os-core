@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { NeuralBackground } from "@/components/portfolio/NeuralBackground";
 import { BootSequence } from "@/components/portfolio/BootSequence";
 import { Hero } from "@/components/portfolio/Hero";
@@ -42,6 +42,22 @@ function Index() {
   const [booted, setBooted] = useState(false);
   const journeyRef = useRef<HTMLElement>(null);
   const simsRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+    // If URL has a hash on first load, ignore it so the page opens at the top.
+    if (window.location.hash) {
+      window.history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    if (booted) window.scrollTo(0, 0);
+  }, [booted]);
 
   const scrollTo = (ref: React.RefObject<HTMLElement | null>) =>
     ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
