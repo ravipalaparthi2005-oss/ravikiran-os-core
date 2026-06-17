@@ -255,9 +255,9 @@ export function Hero({ onLaunchTimeline, onExploreProjects }: { onLaunchTimeline
         transition={{ delay: 0.4, duration: 0.8 }}
         className="text-center"
       >
-        <h1 className="font-display text-[clamp(3rem,10vw,8rem)] font-bold leading-[0.9] tracking-tighter">
-          <span className="block text-foreground/90">PALAPARTHI</span>
-          <span className="block text-aurora">RAVIKIRAN</span>
+        <h1 className='font-["Orbitron"] text-[clamp(2.6rem,9vw,7rem)] font-black uppercase leading-[0.95] tracking-[0.04em]'>
+          <span className="block text-foreground/90 [text-shadow:0_0_30px_oklch(0.85_0.18_200/35%)]">PALAPARTHI</span>
+          <span className="text-aurora block tracking-[0.08em]">RAVIKIRAN</span>
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-balance text-base text-foreground/70 md:text-lg">
           Building <span className="text-foreground">AI-Powered Systems</span>,{" "}

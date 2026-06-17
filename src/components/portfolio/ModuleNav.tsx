@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 export type Module = { id: string; label: string; color: string };
 
 export const MODULES: Module[] = [
-  { id: "hero",       label: "Hero",              color: "oklch(0.85 0.18 200)" },
+  { id: "hero",       label: "Intro",             color: "oklch(0.85 0.18 200)" },
   { id: "journey",    label: "Journey",           color: "oklch(0.85 0.18 200)" },
   { id: "skills",     label: "Skill System",      color: "oklch(0.82 0.18 80)"  },
   { id: "brain",      label: "Inside My Brain",   color: "oklch(0.72 0.18 240)" },
