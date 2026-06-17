@@ -197,6 +197,7 @@ export function Terminal() {
             <span className="ml-auto font-mono text-[10px] text-foreground/40">●REC</span>
           </div>
           <div
+            data-terminal-scroll
             className="h-[420px] cursor-text overflow-y-auto p-4 font-mono text-sm leading-relaxed"
             onClick={() => inputRef.current?.focus()}
           >
