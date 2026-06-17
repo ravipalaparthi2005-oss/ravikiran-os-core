@@ -93,7 +93,7 @@ export const JourneyTrain = forwardRef<HTMLElement>((_, ref) => {
                 transition={{ duration: 0.7, ease: "easeOut" }}
                 className="relative pl-20 md:flex md:items-center md:pl-0"
               >
-                <div className={`md:w-1/2 ${left ? "md:pr-24 md:text-right" : "md:order-2 md:pl-24"}`}>
+                <div className={`md:w-1/2 ${left ? "md:pr-24 md:text-right" : "md:ml-auto md:pl-24"}`}>
                   {/* Station building */}
                   <motion.div
                     whileHover={{ y: -6, rotateX: 4, rotateY: left ? -4 : 4 }}
