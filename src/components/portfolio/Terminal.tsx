@@ -109,9 +109,20 @@ export function Terminal() {
   const [histIdx, setHistIdx] = useState<number>(-1);
   const endRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const didMount = useRef(false);
 
   useEffect(() => {
-    endRef.current?.scrollIntoView({ behavior: "smooth" });
+    // Skip the first render so the terminal does not yank the whole page
+    // down to its bottom on initial load.
+    if (!didMount.current) {
+      didMount.current = true;
+      return;
+    }
+    const end = endRef.current;
+    const scroller = end?.closest<HTMLElement>("[data-terminal-scroll]");
+    if (scroller) {
+      scroller.scrollTop = scroller.scrollHeight;
+    }
   }, [lines]);
 
   const run = (raw: string) => {
@@ -186,6 +197,7 @@ export function Terminal() {
             <span className="ml-auto font-mono text-[10px] text-foreground/40">●REC</span>
           </div>
           <div
+            data-terminal-scroll
             className="h-[420px] cursor-text overflow-y-auto p-4 font-mono text-sm leading-relaxed"
             onClick={() => inputRef.current?.focus()}
           >
